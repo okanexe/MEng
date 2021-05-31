@@ -1,0 +1,42 @@
+
+0x0000 sw x1 x2 0
+0x0004 sw x10 x2 8
+
+0x0008 addi x5 x10 -1 —> x5 = n-1
+0x000c bge x5 x0 10 —> L1 —>0x0020
+
+0x0010 addi x10 x0 1
+0x0014 addi x2 x0 0
+0x0018 addi x3 x0 0
+0x001c jalr x0 x1 0 —> x1 adres tutuyor
+
+0x0020 addi x10 x10 -1 —> n = n - 1
+0x0024 jal x1 ffffffee —> fact —> 0x0000
+
+0x0028 addi x6 x10 0 —>  x6 = n - 1
+0x002c lw x1 x2 0 —> x2 konumundaki değer için
+0x0030 lw x10 x2 8 —> x3 konumundaki değer için
+0x0034 sw x0 x2 0
+0x0038 sw x0 x2 8 —> pop 2 items from memory
+
+0x003c add x17 x0 x6
+0x0040 beq x17 x0 16 -—> 0x0050
+0x0044 add x19 x19 x10 --> x6 kadar x10 ekleniyor değer x19da tutuluyor
+0x0048 subi x17 x17 1
+0x004c jal x0 fffffffa
+
+0x0050 jal x0 2 —> return to caller --> faktoriyelden çıkar
+
+0x0054 addi x21 x0 0
+0x0058 add x21 x0 x10 —> faktoriyelden dönen değer
+0x005c srai x22 x21 2 —> x21 faktoriyelden gelen 4’e böl
+0x0060 addi x11 x0 5
+0x0064 blt x22 x11 12 —> kalan = 4, 3, 2, 1, 0
+0x0068 srai x22 x22 2
+0x006c jal x0 fffffff8 --> anlık*2
+0x0070 addi x4 x0 3
+0x0074 beq x22 x4 12 // 2 kaynak yazmacı olacak.
+0x0078 addi x23 x0 1
+0x007c SON
+0x0080 addi x23 x0 0
+0x0084 SON
